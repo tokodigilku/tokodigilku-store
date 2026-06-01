@@ -1,91 +1,94 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Store Digital</title>
 
 <style>
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f5f7fa;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
 }
 
-header{
-background:#2563eb;
-color:white;
-padding:30px;
-text-align:center;
-}
-
-.banner{
-padding:20px;
-text-align:center;
-}
-
-.produk-container{
-padding:15px;
+h1{
+    text-align:center;
+    color:#2563eb;
 }
 
 .produk{
-background:white;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-.harga{
-font-size:20px;
-font-weight:bold;
-color:#2563eb;
+    background:white;
+    padding:15px;
+    margin-top:15px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
 }
 
 button{
-width:100%;
-padding:12px;
-background:#2563eb;
-color:white;
-border:none;
-border-radius:8px;
-font-size:16px;
-}
-
-footer{
-text-align:center;
-padding:20px;
-color:#666;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
 <h1>Store Digital</h1>
-<p>Produk Digital Premium</p>
-</header>
 
-<div class="banner">
-<h2>Selamat Datang</h2>
-<p>Temukan produk digital berkualitas dengan harga terjangkau.</p>
-</div>
+<div id="produk-list"></div>
 
-<div class="produk-container">
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "API_KEY_ANDA",
+  authDomain: "store-digital-57516.firebaseapp.com",
+  projectId: "store-digital-57516",
+  storageBucket: "store-digital-57516.firebasestorage.app",
+  messagingSenderId: "462722153995",
+  appId: "1:462722153995:web:7c7bb815134ba91915910e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const produkList = document.getElementById("produk-list");
+
+const querySnapshot = await getDocs(collection(db, "produk"));
+
+querySnapshot.forEach((doc) => {
+
+const data = doc.data();
+
+produkList.innerHTML += `
 <div class="produk">
-<h3>Resep 1</h3>
-<p>File Digital</p>
-<p class="harga">Rp5.000</p>
+<h2>${produk1}</h2>
+<p>${produk.digital.premium}</p>
+<h3>${Rp10.000}</h3>
+
+<a href="${https://drive.google.com/file/d/168XVLktvt_lY5of15H0pxqGk9gRu9LDw/view?usp=drivesdk}" target="_blank">
 <button>Beli Sekarang</button>
-</div>
+</a>
 
 </div>
+`;
 
-<footer>
-© 2026 Store Digital
-</footer>
+});
+
+</script>
 
 </body>
 </html>
